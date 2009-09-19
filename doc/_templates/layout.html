@@ -1,0 +1,15 @@
+{% extends "!layout.html" %}
+
+{%- block extrahead %}
+<link rel="stylesheet" href="{{ pathto('_static/hyves.css', 1) }}" type="text/css" />
+{% endblock %}
+
+{%- block relbar1 %}
+<div class='header'>
+<a href="{{ pathto(master_doc) }}">
+<img class="logo" src="{{ pathto('_static/hyves-logo.png', 1) }}" alt="Logo"/>
+</a>
+</div>
+{{ super() }}
+{% endblock %}
+

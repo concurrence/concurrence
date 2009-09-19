@@ -1,0 +1,101 @@
+Installing Concurrence
+======================
+
+The quick and easy way
+----------------------
+Here we assume you want install Concurrence for use with 'Normal Python' as opposed to 'Stackless Python'. 
+This is the easiest way to get started with Concurrence. Later you may want to try out Stackless because it
+delivers a bit better performance (typicaly about 10-25% faster).
+We will be using `setup tools <http://pypi.python.org/pypi/setuptools>`_ to install all dependencies.
+
+Note that Linux users might need to make sure they are running as root, or prefix the commands with 'sudo'.
+
+First we need to install `Pyrex <http://www.cosc.canterbury.ac.nz/greg.ewing/python/Pyrex>`_::
+
+    easy_install pyrex 
+
+Next we will install concurrence::
+
+    easy_install concurrence
+
+If might give an error: Setup script exited with error: SandboxViolation: ... 
+This is a known problem with Pyrex, please do::
+
+    python -c "from Pyrex.Compiler import Scanning;Scanning.get_lexicon()"
+
+And then try install concurrence again
+
+Finally we need to install the `Greenlet package <http://pypi.python.org/pypi/greenlet>`_:: 
+
+    easy_install greenlet
+
+If you run into compiler problems on Linux, this is most probably caused by missing development headers
+for Python and or libevent. On Ubuntu these packages can be installed using::
+
+    apt-get install python-dev
+    apt-get install libevent-dev
+
+If you run into compiler problems on OSX, this is most probably casued by missing libevent and or its headers
+
+   1. `Download latest stable release of libevent <http://www.monkey.org/~provos/libevent>`_.
+   2. Unzip and cd into the libevent directory
+   3. Run ./configure && make
+   4. Run sudo make install
+   5. Try installing concurrence again
+
+That should be it!, you should now be able to start playing with the examples
+
+Optional dependencies
+---------------------
+
+If you want to use the simple web framework included with Concurrence, you need to install
+`Routes <http://routes.groovie.org>`_ and `WebOb <http://pythonpaste.org/webob>`_::
+
+    easy_install routes  
+    easy_install webob
+
+If you use Python2.5, you might want to install 'simplejson' as well::
+
+    easy_install simplejson
+
+
+Running the examples
+--------------------
+First make sure you have the source distibution of Concurrence::
+
+    svn checkout http://concurrence.googlecode.com/svn/trunk/ concurrence
+
+The examples can be found in the examples directory and are documented on the Concurrence
+website at http://opensource.hyves.org/concurrence
+
+Installing stackless
+--------------------
+If you want to run Concurrence on top of stackless (which is a bit faster), you will need to
+install Stackless Python.
+Download the latest stackless tarball from www.stackless.com. unpack it somewhere (/tmp/stackless), and execute
+the folowing commands:
+
+UBUNTU:
+Make sure you have <libreadline-dev> package. Otherwise you have no history support in the python interactive shell
+(on ubuntu: apt-get install libreadline-dev)
+
+We will install stackless in /opt/stackless using the prefix argument to configure. This will prevent any existing python installation
+from being overwritten::
+
+    UBUNTU:
+	    ./configure --prefix=/opt/stackless --with-readline --with-zlib=/usr/include
+	    make
+	    make install
+
+    OSX (Leopard):
+	    ./configure --prefix=/opt/stackless --enable-framework --enable-stacklessfewerregisters --with-readline --with-zlib=/usr/include
+	    echo '#define SETPGRP_HAVE_ARG' >> pyconfig.h
+	    make
+	    make install
+
+I always like to make a symlink to stackless for everyday usage and to differentiate it from 'normal' python:
+ 
+ln -s /opt/stackless/bin/python2.5 /usr/bin/stackless
+
+
+

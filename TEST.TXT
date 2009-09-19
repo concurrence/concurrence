@@ -1,0 +1,15 @@
+if you want to run the tests please type
+
+PYTHON=python make test
+
+or
+
+PYTHON=stackless make test
+
+If you want the mysql tests to succeed, you need to have mysql installed
+and you have to create the concurrence mysql test database (from the test directory):
+
+mysqladmin create concurrence_test -u root -p
+cat concurrence_test.sql | mysql -u root -p
+
+

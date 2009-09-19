@@ -1,0 +1,27 @@
+0.3.2
+- added support for POST to HTTP Client
+- removed profile function, added profile cmdline argument
+- changed Tasklet.yield_() to use sleep(0.0) instead of stackless.schedule in order to give other IO bound tasks a change to run
+- added application support (IOC container) (currently undocumented)
+- refactored pool and sqlalchemy pool adaptor to include 'nullpool'.
+
+0.3.1
+- now uses standard python EOFError 
+- improved implementation of CompatibleFile (reader.file(), writer.file())
+- no longer imports greenlets from py.lib as they don't provide it anymore, now imports from greenlet packet. updated INSTALL documentation.
+- documentation updates
+- fixed compilation errors and unittest for OSX
+- http client now sends concurrence verion in AGENT string
+- fixed issue #6 (HTTPResponse.get_header did not return default, but None when header not found)
+
+0.3
+---
+- renamed API buffer.read_bytes_until_crlf -> buffer.read_line
+- changed HTTP client API
+- changed concurrence.web API: @web(path = 'status') -> @web.route('/status')
+- added filter decorator to concurrence.web: @web.filter(MyFilter())
+- added controller filters to concurrence.web
+- added TCP_NODELAY to all tcp sockets by default
+- documentation updates
+        
+
